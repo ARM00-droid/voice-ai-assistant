@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <!-- data-state is changed by script.js: idle | listening | thinking | speaking -->
+  <div id="app" data-state="idle">
+
+    <!-- 1. Top navigation -->
+    <header class="nav glass">
+      <div class="brand"><span class="brand-dot"></span>Roger</div>
+      <div class="nav-right">
+        <span class="online" id="online"><i></i><span id="onlineText">Connecting</span></span>
+        <button class="icon-btn" id="settingsBtn" aria-label="Settings">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="9" cy="7" r="2.4" fill="#0b0c1a"/><circle cx="15" cy="17" r="2.4" fill="#0b0c1a"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <!-- 2 + 3. Orb, status and microphone -->
+      <section class="stage">
+        <div class="orb" aria-hidden="true">
+          <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+          <span class="swirl"></span><span class="core"></span>
+        </div>
+
+        <p class="status" id="status" role="status" aria-live="polite">Ready</p>
+        <div class="voice-bars" id="voiceBars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+        <div class="controls">
+          <button class="cancel" id="cancelBtn" hidden>Cancel</button>
+          <button class="mic" id="micBtn" aria-label="Speak to Roger">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+          </button>
+        </div>
+        <p class="hint">Hold to talk, or tap to start and tap again to send</p>
+      </section>
+
+      <!-- 4. Conversation -->
+      <section class="chat glass">
+        <div class="messages" id="messages" aria-live="polite"></div>
+        <form class="composer" id="composer" autocomplete="off">
+          <input id="textInput" type="text" placeholder="Or type a message for Roger" aria-label="Type a message" />
+          <button type="submit" aria-label="Send message">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="alert" hidden></div>
+
+    <dialog id="settings" class="glass">
+      <h2>Settings</h2>
+      <label class="row"><span>Play Roger's voice automatically</span><input type="checkbox" id="autoplay" /></label>
+      <button class="danger" id="clearBtn">Clear conversation</button>
+      <button class="close" id="closeSettings">Done</button>
+    </dialog>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
